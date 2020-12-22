@@ -1,0 +1,23 @@
+default: &default
+   adapter: postgresql
+   encoding: unicode
+  
+development:
+   adapter: postgresql
+   encoding: unicode
+   host: localhost
+   pool: 5
+   database: twittter_dev
+   username: postgres
+   password: s7
+
+test:
+  <<: *default
+  database: twittter_test
+ 
+production:
+  <<: *default
+  database: twittter_production
+  username: twittter
+  #password: <%= ENV['TWITTTER_DATABASE_PASSWORD'] %>
+
