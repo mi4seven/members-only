@@ -1,4 +1,5 @@
 <div class="box">
+
   <%= simple_form_for(@post) do |f| %>
     <%= f.error_notification %> 
 
@@ -10,14 +11,14 @@
       </figure>
       <div class="media-content">
         <div class="field">
-          <p class="control">
-            <input name="title" class="input" type="text" placeholder="Add at title..."></input>
-          </p>
+          <div class="control">                  
+              <%= f.text_field :title, class: "input", placeholder: 'Enter Title' %>       
+          </div>
         </div>      
         <div class="field">
-          <p class="control">
-            <textarea name="body" class="textarea" type="text" placeholder="Add a post..."></textarea>
-          </p>
+           <div class="control">    
+              <%= f.text_area :body, class: "textarea", placeholder: 'Enter Post'%> 
+          </div>
         </div>
         <nav class="level">
           <div class="level-left">

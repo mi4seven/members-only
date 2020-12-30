@@ -10,19 +10,19 @@ class PostsController < ApplicationController
         @post = Post.new
     end
 
-    def create
-        #@post = Post.new(post_params)
-        @post = Post.new(params[:post])        
-        @post.save
 
-        redirect_to root_path notice: 'Post was successfully created.'
+    #https://stackoverflow.com/questions/30825735/param-is-missing-or-the-value-is-empty-parametermissing-in-resultscontrollerup/30826895
+    #https://stackoverflow.com/questions/11093848/rails-undefined-method-model-name-for-nilclassclass
+    
+    def create
+        @post = Post.new(post_params)    
             
-        # if @post.save
-        #     redirect_to post_path(@post)
-        # redirect_to root_path notice: 'Post was successfully created.'    
-        # else
-        #     render :new
-        # end
+        if @post.save
+            #redirect_to post_path(@post)
+            redirect_to root_path notice: 'Post was successfully created.'    
+        else
+            render :new
+        end
     end
 
     private
