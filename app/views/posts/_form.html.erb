@@ -1,8 +1,16 @@
 <div class="box">
 
-  <%= simple_form_for(@post) do |f| %>
-    <%= f.error_notification %> 
+  <%# Displaying only one error message per field %>
 
+    <% if @post.errors.any? %>
+      <div id="error_explanation">
+        <% @post.errors.each do |attr, msg| %>
+          <%= "#{msg}" if @post.errors[attr].first == msg %> 
+        <% end %>  
+      </div>
+    <% end %>  
+
+  <%= simple_form_for(@post) do |f| %>
     <article class="media">
       <figure class="media-left">
         <p class="image is-64x64">
@@ -20,13 +28,19 @@
               <%= f.text_area :body, class: "textarea", placeholder: 'Enter Post'%> 
           </div>
         </div>
+
         <nav class="level">
           <div class="level-left">
             <div class="level-item">
               <%= f.button :submit, class: "button is-info" %>
-            </div>          
+            </div>
+            <div class="level-item">
+              <%= link_to 'Cancel', root_path, class: "button is-info" %> 
+            </div>            
+                      
           </div>
         </nav>
+
       </div>
     </article>
 

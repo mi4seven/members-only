@@ -7,23 +7,41 @@ class PostsController < ApplicationController
     end
 
     def new
-        @post = Post.new
+        #@post = Post.new
+        @post = current_user.posts.build
     end
-
-
-    #https://stackoverflow.com/questions/30825735/param-is-missing-or-the-value-is-empty-parametermissing-in-resultscontrollerup/30826895
-    #https://stackoverflow.com/questions/11093848/rails-undefined-method-model-name-for-nilclassclass
     
     def create
-        @post = Post.new(post_params)    
+        @post = current_user.posts.build(post_params)    
             
         if @post.save
-            #redirect_to post_path(@post)
-            redirect_to root_path notice: 'Post was successfully created.'    
+            redirect_to root_path #notice: 'Post was successfully created.'    
+            flash.notice = "Post '#{@post.title}' Created!" 
         else
             render :new
         end
     end
+
+
+    def edit            
+
+    end
+    
+    
+    def update            
+        if @post.update(post_params)
+            redirect_to root_path #notice: 'Post was successfully updated.'   
+            flash.notice = "Post '#{@post.title}' Updated!" 
+        else
+            render :edit
+        end
+    end
+
+    def destroy  
+        @post.destroy
+        redirect_to root_path notice: 'Post was successfully deleted.'    
+    end
+
 
     private
     # Use callbacks to share common setup or constraints between actions.
