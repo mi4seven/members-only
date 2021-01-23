@@ -7,7 +7,6 @@ class PostsController < ApplicationController
     end
 
     def new
-        #@post = Post.new
         @post = current_user.posts.build
     end
     
@@ -22,12 +21,10 @@ class PostsController < ApplicationController
         end
     end
 
-
     def edit            
 
     end
-    
-    
+      
     def update            
         if @post.update(post_params)
             redirect_to root_path #notice: 'Post was successfully updated.'   
@@ -42,9 +39,7 @@ class PostsController < ApplicationController
         redirect_to root_path notice: 'Post was successfully deleted.'    
     end
 
-
     private
-    # Use callbacks to share common setup or constraints between actions.
     def set_post
         @post = Post.find(params[:id])
     end    

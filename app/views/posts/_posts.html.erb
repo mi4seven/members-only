@@ -9,14 +9,18 @@
             <article class="media">
                 <figure class="media-left">
                     <p class="image is-64x64">
-                    <img src="https://versions.bulma.io/0.7.0/images/placeholders/128x128.png">
+                    <%# <img src="https://versions.bulma.io/0.7.0/images/placeholders/128x128.png"> %>
+                    <%= gravatar_image_tag(current_user.email, size: 64, alt: current_user.name) %>
                     </p>
                 </figure>
 
                 <div class="media-content">
                     <div class="content">
                         <p>
-                            <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+                            <% if user_signed_in? %>
+                                <strong><%= post.user.name %></strong><br/>
+                                <small><%= post.user.email %></small><br/>	
+                            <% end %>    
                             <br>
                             <strong><%= post.title %></strong>
                             <br>
@@ -31,8 +35,7 @@
                                             <span class="icon"><i class="fa fa-link" aria-hidden="true"></i></span>
                                         <% end %>
                                     </a>
-                                    <%# <% if current_user.id == post.user.id %>
-                                    <% if current_user.id == 1 %>
+                                    <% if current_user.id == post.user.id %>
                                         <a class="level-item">
 
                                             <%= link_to edit_post_path(post), class: "level-item" do %>
